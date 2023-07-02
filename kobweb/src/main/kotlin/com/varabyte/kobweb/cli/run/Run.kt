@@ -43,12 +43,13 @@ fun handleRun(
     siteLayout: SiteLayout,
     useAnsi: Boolean,
     runInForeground: Boolean,
+    gradleArgs: String?,
 ) {
     val originalEnv = env
 
     @Suppress("NAME_SHADOWING") // We're intentionally intercepting the original value
     val env = env.takeIf { siteLayout != SiteLayout.STATIC } ?: ServerEnvironment.PROD
-    KobwebGradle(env, projectDir).use { kobwebGradle -> handleRun(originalEnv, env, siteLayout, useAnsi, runInForeground, kobwebGradle) }
+    KobwebGradle(env, projectDir, gradleArgs).use { kobwebGradle -> handleRun(originalEnv, env, siteLayout, useAnsi, runInForeground, kobwebGradle) }
 }
 
 private fun handleRun(

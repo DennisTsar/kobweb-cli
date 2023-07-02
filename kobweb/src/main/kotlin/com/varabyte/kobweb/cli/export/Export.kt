@@ -21,9 +21,9 @@ private enum class ExportState {
     INTERRUPTED,
 }
 
-fun handleExport(projectDir: File, siteLayout: SiteLayout, useAnsi: Boolean) {
+fun handleExport(projectDir: File, siteLayout: SiteLayout, useAnsi: Boolean, gradleArgs: String?) {
     // exporting is a production-only action
-    KobwebGradle(ServerEnvironment.PROD, projectDir).use { kobwebGradle ->
+    KobwebGradle(ServerEnvironment.PROD, projectDir, gradleArgs).use { kobwebGradle ->
         handleExport(siteLayout, useAnsi, kobwebGradle)
     }
 }

@@ -60,6 +60,10 @@ private fun ParameterHolder.notty() = option("--notty",
     help = "Explicitly disable TTY support. In this case, runs in plain mode, logging output sequentially without listening for user input, which is useful for CI environments or Docker containers.",
 ).counted().validate { require(it <= 1) { "Cannot specify `--notty` more than once" } }
 
+private fun ParameterHolder.gradleArgs() = option("--gradle",
+    help = "Arguments that will be passed to the Gradle command.",
+)
+
 private fun Mode.toTtyParam() = when (this) {
     Mode.INTERACTIVE -> "--tty"
     Mode.DUMB -> "--notty"
@@ -195,10 +199,11 @@ fun main(args: Array<String>) {
         val mode by mode()
         val layout by layout()
         val path by path()
+        val gradleArgs by gradleArgs()
 
         override fun shouldCheckForUpgrade() = shouldUseAnsi(tty, notty, mode)
         override fun doRun() {
-            handleExport(path, layout, shouldUseAnsi(tty, notty, mode))
+            handleExport(path, layout, shouldUseAnsi(tty, notty, mode), gradleArgs)
         }
     }
 
@@ -210,10 +215,11 @@ fun main(args: Array<String>) {
         val mode by mode()
         val layout by layout()
         val path by path()
+        val gradleArgs by gradleArgs()
 
         override fun shouldCheckForUpgrade() = shouldUseAnsi(tty, notty, mode)
         override fun doRun() {
-            handleRun(env, path, layout, shouldUseAnsi(tty, notty, mode), foreground)
+            handleRun(env, path, layout, shouldUseAnsi(tty, notty, mode), foreground, gradleArgs)
         }
     }
 
@@ -222,13 +228,14 @@ fun main(args: Array<String>) {
         val notty by notty()
         val mode by mode()
         val path by path()
+        val gradleArgs by gradleArgs()
 
         // Don't check for an upgrade on create, because the user probably just installed kobweb anyway, and the update
         // message kind of overwhelms the instructions to start running the app.
         override fun shouldCheckForUpgrade() = false
 
         override fun doRun() {
-            handleStop(path, shouldUseAnsi(tty, notty, mode))
+            handleStop(path, shouldUseAnsi(tty, notty, mode), gradleArgs)
         }
     }
 
