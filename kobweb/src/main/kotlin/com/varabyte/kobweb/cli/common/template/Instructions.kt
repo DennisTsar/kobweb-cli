@@ -48,7 +48,7 @@ sealed class Instruction(
      *
      * @param name The name of this variable, which can be referenced in freemarker expressions later.
      * @param prompt The prompt to show the user.
-     * @param note If set, added as extra contextual information after the the prompt but before the area where the user
+     * @param note If set, added as extra contextual information after the prompt but before the area where the user
      *   types their answer.
      * @param default The default value to use if nothing is typed. This value will be processed by freemarker and can
      *   be dynamic!

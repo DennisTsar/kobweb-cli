@@ -272,7 +272,7 @@ private fun handleRun(
         kobwebApplication.assertServerNotAlreadyRunning()
 
         // If we're non-interactive, it means we just want to start the Kobweb server and exit without waiting for
-        // for any additional changes. (This is essentially used when run in a web server environment)
+        // any additional changes. (This is essentially used when run in a web server environment)
         kobwebGradle.startServer(enableLiveReloading = false, siteLayout, gradleArgsCommon + gradleArgsStart)
             .also { it.waitFor() }
         if (gradleArgsStop.isNotEmpty()) {

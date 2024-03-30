@@ -53,7 +53,7 @@ For a release...
 > new commit is pushed.
 >
 > You can find these by clicking on the relevant [build run](https://github.com/varabyte/kobweb-cli/actions/workflows/build.yml)
-> and then downloading the `kobweb-cli-artifacts` zip from the `Artifacts` section).
+> and then downloading the `kobweb-cli-artifacts` zip from the `Artifacts` section.
 >
 > You should consider using these instead of ones you built yourself, as the CI environment is guaranteed to be pure,
 > whereas local environments may be contaminated by things you've installed or set up on your own system.
