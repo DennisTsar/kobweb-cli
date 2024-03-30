@@ -17,7 +17,6 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
     implementation(libs.clikt)
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotter)
